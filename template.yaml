@@ -3,22 +3,22 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   WanderLamb
 
-  Sample SAM Template for WanderLamb
+  SAM Template for WanderLamb
 
 Resources:
-  HelloWorldFunction:
+  WanderLambFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: hello-world/
+      CodeUri: wanderLamb/
       Handler: app.lambdaHandler
       Runtime: nodejs22.x
       Architectures:
         - x86_64
       Events:
-        HelloWorld:
+        WanderLamb:
           Type: Api
           Properties:
-            Path: /hello
+            Path: /travel
             Method: get
     Metadata:
       BuildMethod: esbuild
@@ -28,14 +28,3 @@ Resources:
         Sourcemap: true
         EntryPoints: 
         - app.ts
-
-Outputs:
-  HelloWorldApi:
-    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
-  HelloWorldFunction:
-    Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt HelloWorldFunction.Arn
-  HelloWorldFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt HelloWorldFunctionRole.Arn
